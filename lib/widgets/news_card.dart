@@ -13,9 +13,8 @@ class NewsCard extends StatelessWidget {
       height: 170,
       child: Row(
         children: [
-          Flexible(
+          Expanded(
             flex: 1,
-            fit: FlexFit.tight,
             child: SizedBox(
                 height: 170,
                 child: Hero(
@@ -29,7 +28,7 @@ class NewsCard extends StatelessWidget {
                   ),
                 )),
           ),
-          Flexible(flex: 2, fit: FlexFit.tight, child: _infoSection())
+          Expanded(flex: 2, child: _infoSection())
         ],
       ),
     );
