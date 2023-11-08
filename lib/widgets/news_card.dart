@@ -18,11 +18,14 @@ class NewsCard extends StatelessWidget {
             fit: FlexFit.tight,
             child: SizedBox(
                 height: 170,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    article.urlToImage ?? K.notFoundImageURL,
-                    fit: BoxFit.fitHeight,
+                child: Hero(
+                  tag: article.title!,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.network(
+                      article.urlToImage ?? K.notFoundImageURL,
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
                 )),
           ),
@@ -41,11 +44,11 @@ class NewsCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: Text(
-                  article.title ?? "-",
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.titleMedium!,
-                ),
+                child: Text(article.title ?? "-",
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.titleMedium!,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis),
               ),
               Expanded(
                   child: Column(

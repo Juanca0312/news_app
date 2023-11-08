@@ -17,9 +17,12 @@ class DetailPage extends StatelessWidget {
       body: ListView(children: [
         SizedBox(
           height: 200,
-          child: Image.network(
-            article.urlToImage ?? K.notFoundImageURL,
-            fit: BoxFit.cover,
+          child: Hero(
+            tag: article.title!,
+            child: Image.network(
+              article.urlToImage ?? K.notFoundImageURL,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         const SizedBox(height: 16.0),
