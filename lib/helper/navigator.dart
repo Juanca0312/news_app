@@ -14,7 +14,19 @@ class NavigatorService {
         .push(MaterialPageRoute(builder: (context) => rn));
   }
 
-  pop(Widget rn) {
+  pop() {
     return navigationKey.currentState!.pop();
+  }
+
+  showLoader() {
+    Future.delayed(Duration.zero, () {
+      showDialog(
+          context: navigationKey.currentContext!,
+          builder: (BuildContext context) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          });
+    });
   }
 }
