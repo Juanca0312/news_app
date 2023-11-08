@@ -12,10 +12,10 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black),
       ),
       body: ListView(children: [
-        Container(
+        SizedBox(
           height: 200,
           child: Image.network(
             article.urlToImage ?? K.notFoundImageURL,
@@ -40,7 +40,10 @@ class DetailPage extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                   Column(
-                    children: [Text(DateTime.parse(article.publishedAt!).day.toString()), Text("hour")],
+                    children: [
+                      Text(DateTime.parse(article.publishedAt!).day.toString()),
+                      Text("hour")
+                    ],
                   )
                 ],
               ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:trainee/model/news_model.dart';
-import 'package:trainee/pages/detail.dart';
 import 'package:trainee/services/news_service.dart';
-import 'package:trainee/utils/const.dart';
+import 'package:trainee/view_model/news_vm.dart';
 import 'package:trainee/widgets/news_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final newsController = Provider.of<NewsVM>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _appBar(),
@@ -38,33 +39,30 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         child: news.isEmpty
             ? const Center(child: CircularProgressIndicator())
-            : _newsContent(),
+            : _newsContent(newsController),
       ),
     );
   }
 
-  ListView _newsContent() {
+  ListView _newsContent(NewsVM newsController) {
     return ListView.separated(
-      itemCount: news.length,
-      itemBuilder: ((context, index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => DetailPage(
-                      article: news[index],
-                    )));
-          },
-          child: NewsCard(
-            article: news[index],
-          ),
-        );
-      }),
-      separatorBuilder: (BuildContext context, int index) {
-        return const Divider(
-          thickness: 1.0,
-        );
-      },
-    );
+              itemCount: news.length,
+              itemBuilder: ((context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    newsController.navigateToDetail(news[index]);
+                  },
+                  child: NewsCard(
+                    article: news[index],
+                  ),
+                );
+              }),
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider(
+                  thickness: 1.0,
+                );
+              },
+            );
   }
 
   AppBar _appBar() {
