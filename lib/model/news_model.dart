@@ -1,4 +1,4 @@
-import 'package:trainee/model/source.dart';
+import 'package:trainee/model/source_model.dart';
 
 class NewsModel {
   String? title;
